@@ -50,6 +50,10 @@ export const customerProducts = pgTable(
 		customer_id: text("customer_id"),
 		entity_id: text("entity_id"),
 		api_version: numeric({ mode: "number" }),
+		
+		// Auto top-up fields
+		auto_topup_threshold: numeric({ mode: "number" }),
+		auto_topup_product_id: text("auto_topup_product_id"),
 	},
 	(table) => [
 		foreignKey({

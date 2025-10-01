@@ -23,6 +23,7 @@ import { DrizzleCli } from "@/db/initDrizzle.js";
 import { deductFromCusRollovers } from "@/internal/customers/cusProducts/cusEnts/cusRollovers/rolloverDeductionUtils.js";
 import { refreshCusCache } from "@/internal/customers/cusCache/updateCachedCus.js";
 import { handleThresholdReached } from "./handleThresholdReached.js";
+import { checkAndTriggerAutoTopup } from "./autoTopupUtils.js";
 
 // 2. Get deductions for each feature
 const getFeatureDeductions = ({
@@ -362,6 +363,18 @@ export const runUpdateUsageTask = async ({
 			return;
 		}
 		console.log("   ✅ Customer balance updated");
+
+		// Check if auto-topup should be triggered
+		await checkAndTriggerAutoTopup({
+			db,
+			internalCustomerId,
+			customerId,
+			features,
+			org,
+			env,
+			logger,
+			cusEnts,
+		});
 	} catch (error) {
 		logger.error(`ERROR UPDATING USAGE`);
 		logger.error(error);

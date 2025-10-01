@@ -43,7 +43,7 @@ export const ToggleButton = ({
 				{infoContent && <InfoTooltip>{infoContent}</InfoTooltip>}
 				<Switch
 					checked={value}
-					className="h-4 w-7 data-[state=checked]:bg-stone-500"
+					className="h-4 w-7 bg-stone-200 data-[state=checked]:bg-purple-600"
 					thumbClassName="h-3 w-3 data-[state=checked]:translate-x-3"
 				/>
 			</div>

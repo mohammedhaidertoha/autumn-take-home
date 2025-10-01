@@ -6,7 +6,9 @@ import { CustomerRewards } from "./customer-rewards";
 import { CustomerToolbar } from "../../CustomerToolbar";
 import { CustomerDetails } from "./CustomerDetails";
 import { CustomerEntities } from "./CustomerEntities";
+import { AutoTopupConfig } from "./AutoTopupConfig";
 import { useCusQuery } from "../../hooks/useCusQuery";
+import { SideAccordion } from "@/components/general/SideAccordion";
 
 export const CustomerSidebar = () => {
 	const { customer } = useCusQuery();
@@ -30,12 +32,17 @@ export const CustomerSidebar = () => {
 			<Accordion
 				type="multiple"
 				className="w-full flex flex-col"
-				defaultValue={["details", "rewards", "entities"]}
+				defaultValue={["details", "rewards", "entities", "autotopup"]}
 			>
 				<CustomerDetails
 					setIsModalOpen={setIsModalOpen}
 					setModalType={setModalType}
 				/>
+				<div className="flex w-full border-b p-4">
+					<SideAccordion title="Auto Top-Up" value="autotopup">
+						<AutoTopupConfig />
+					</SideAccordion>
+				</div>
 				<CustomerRewards />
 				{entities.length > 0 && <CustomerEntities />}
 			</Accordion>

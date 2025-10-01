@@ -27,6 +27,7 @@ export const products = pgTable(
 		env: text().notNull(),
 		is_add_on: boolean("is_add_on").notNull().default(false),
 		is_default: boolean("is_default").notNull().default(false),
+		is_auto_topup: boolean("is_auto_topup").notNull().default(false),
 		group: text().default(""),
 		version: numeric({ mode: "number" }).notNull().default(1),
 		processor: jsonb().$type<ProductProcessor>().default(sql`null`),

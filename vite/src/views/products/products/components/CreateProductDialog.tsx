@@ -26,6 +26,7 @@ const defaultProduct = {
 	group: "",
 	is_add_on: false,
 	is_default: false,
+	is_auto_topup: false,
 };
 
 function CreateProduct({
@@ -88,7 +89,7 @@ function CreateProduct({
 					Product
 				</Button>
 			</DialogTrigger>
-			<DialogContent className="w-[500px]">
+			<DialogContent className="w-[600px]">
 				<DialogTitle>Create Product</DialogTitle>
 				<ProductConfig
 					product={product}
@@ -104,8 +105,8 @@ function CreateProduct({
 				)}
 
 				<DialogFooter>
-					<div className="flex justify-between items-center gap-2 w-full mt-2">
-						<div className="flex gap-4">
+					<div className="flex justify-between items-center w-full mt-4">
+						<div className="flex items-center gap-4">
 							<ToggleButton
 								disabled={product?.is_add_on}
 								buttonText="Default"
@@ -127,12 +128,20 @@ function CreateProduct({
 									setProduct({ ...product, is_add_on: !product?.is_add_on })
 								}
 							/>
+							<ToggleButton
+								buttonText="Auto Top-Up"
+								infoContent="This product can be used for automatic credit top-ups when customer balance falls below threshold"
+								value={product?.is_auto_topup}
+								setValue={() =>
+									setProduct({ ...product, is_auto_topup: !product?.is_auto_topup })
+								}
+							/>
 						</div>
 						<Button
 							isLoading={loading}
 							onClick={handleCreateClicked}
 							variant="gradientPrimary"
-							className="min-w-44 w-44 max-w-44"
+							className="min-w-44"
 						>
 							Create Product
 						</Button>

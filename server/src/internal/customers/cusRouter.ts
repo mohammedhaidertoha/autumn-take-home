@@ -23,6 +23,11 @@ import { createStripeCusIfNotExists } from "@/external/stripe/stripeCusUtils.js"
 import { handleTransferProduct } from "./handlers/handleTransferProduct.js";
 import { handleBatchCustomers } from "../api/batch/handlers/handleBatchCustomers.js";
 import { toSuccessUrl } from "../orgs/orgUtils/convertOrgUtils.js";
+import {
+	handleSetAutoTopup,
+	handleGetAutoTopup,
+	handleDeleteAutoTopup,
+} from "./handlers/handleAutoTopup.js";
 
 export const cusRouter: Router = Router();
 
@@ -166,3 +171,11 @@ cusRouter.post("/:customer_id/coupons/:coupon_id", handleAddCouponToCus);
 cusRouter.use("/:customer_id/entities", entityRouter);
 
 cusRouter.post("/:customer_id/transfer", handleTransferProduct);
+
+// Auto-topup endpoints
+cusRouter.post("/:customer_id/auto-topup", handleSetAutoTopup);
+cusRouter.get("/:customer_id/auto-topup", handleGetAutoTopup);
+cusRouter.delete(
+	"/:customer_id/auto-topup/:customer_product_id",
+	handleDeleteAutoTopup,
+);
